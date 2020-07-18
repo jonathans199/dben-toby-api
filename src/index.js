@@ -1,4 +1,5 @@
 require('./models/Users')
+require('./models/Stores')
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')

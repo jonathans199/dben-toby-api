@@ -10,3 +10,5 @@ const storeSchema = new mongoose.Schema({
     unique: true,
   },
 })
+
+mongoose.model('Store', storeSchema)

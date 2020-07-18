@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+
 const User = mongoose.model('User')
 const Store = mongoose.model('Store')
 
@@ -22,9 +23,13 @@ router.post('/newStore', async (req, res) => {
   const { storeId, storeAddress } = req.body
 
   try {
-    const store 
-  }
+    const store = new Store({ storeId, storeAddress })
 
+    await store.save()
+    res.send('new store was added')
+  } catch (err) {
+    return res.status(422).send(err.message)
+  }
 })
 
 module.exports = router
