@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 const User = mongoose.model('User')
 const Store = mongoose.model('Store')
@@ -11,25 +12,49 @@ router.post('/signup', async (req, res) => {
 
   try {
     const user = new User({ email, password })
-
     await user.save()
-    res.send('you made a post request')
+
+    const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
+    res.send({ token })
   } catch (err) {
     return res.status(422).send(err.message)
   }
 })
 
-router.post('/newStore', async (req, res) => {
-  const { storeId, storeAddress } = req.body
+router.post('/signin', async (req, res) => {
+  const { email, password } = req.body
+
+  if (!email || !password) {
+    return res.status(422).send({ error: 'Must provide email and password' })
+  }
+
+  const user = await User.findOne({ email })
+  if (!user) {
+    return res.status(404).send({ error: 'Email not found' })
+  }
 
   try {
-    const store = new Store({ storeId, storeAddress })
-
-    await store.save()
-    res.send('new store was added')
+    await user.comparePassword(password)
+    const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
+    res.send({ token })
+    console.log(token)
+    
   } catch (err) {
-    return res.status(422).send(err.message)
+    return res.status(422).send({ error: 'Invalid password or email' })
   }
 })
+
+// router.post('/newStore', async (req, res) => {
+//   const { storeId, storeAddress } = req.body
+
+//   try {
+//     const store = new Store({ storeId, storeAddress })
+
+//     await store.save()
+//     res.send('new store was added')
+//   } catch (err) {
+//     return res.status(422).send(err.message)
+//   }
+// })
 
 module.exports = router
