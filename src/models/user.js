@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const { Schema } = require('mongoose')
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
     required: true,
+    lowercase: true,
     max: 255,
     min: 6,
   },
@@ -18,6 +20,11 @@ const userSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     default: Date.now,
+  },
+  userType: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'UserType'
   },
 })
 
