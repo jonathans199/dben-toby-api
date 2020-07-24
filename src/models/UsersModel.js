@@ -24,15 +24,18 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', function (next) {
   const user = this
 
+  // if user has not modified password
   if (!user.isModified('password')) {
     return next()
   }
 
+  // generate salt with bcrypt
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
       return next(err)
     }
-
+    
+    // create hash with salt
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) {
         return next(err)
@@ -43,7 +46,7 @@ userSchema.pre('save', function (next) {
   })
 })
 
-userSchema.method.comparePassword = function (candidatePassword) {
+userSchema.methods.comparePassword = function (candidatePassword) {
   const user = this
 
   return new Promise((resolve, reject) => {
