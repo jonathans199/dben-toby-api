@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
 
-const storeSchema = new mongoose.Schema({
+const StoreSchema = new mongoose.Schema({
   storeId: {
     type: String,
     unique: true,
   },
   storeAddress: {
     type: String,
-    unique: true,
   },
 })
 
-mongoose.model('Store', storeSchema)
+mongoose.model('Store', StoreSchema)
