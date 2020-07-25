@@ -38,36 +38,12 @@ router.post('/signin', async (req, res) => {
     await user.comparePassword(password)
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY')
     res.send({ token })
-    console.log(token)
+    console.log('logged in ')
   } catch (err) {
     return res.status(422).send({ error: 'Invalid password or email' })
   }
 })
 
-// router.post('/newStore', async (req, res) => {
-//   const { storeId, storeAddress } = req.body
-
-//   try {
-//     const store = new Store({ storeId, storeAddress })
-
-//     await store.save()
-//     res.send('new store was added')
-//   } catch (err) {
-//     return res.status(422).send(err.message)
-//   }
-// })
-
-router.post('/newUserType', async (req, res) => {
-  const { userType } = req.body
-
-  try {
-    const newUserType = new UserType({ userType })
-
-    await newUserType.save()
-    res.send('new usertype was added')
-  } catch (err) {
-    return res.status(422).send(err.message)
-  }
-})
 
 module.exports = router
+
