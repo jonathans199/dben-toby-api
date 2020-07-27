@@ -21,10 +21,15 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // userType: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'UserType'
+  // },
   userType: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
-    ref: 'UserType'
+    // ref: 'UserType'
   },
 })
 
@@ -72,4 +77,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
   })
 }
 
-mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)

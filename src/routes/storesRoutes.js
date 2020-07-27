@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const Store = require('../models/Store')
-const { request } = require('express')
 
+const Store = require('../models/storeModel')
+// const requireAuth = require('../middlewares/requireAuth')
+// const { request } = require('express')
 
 // Get all Stores
 router.get('/', async (req, res) => {
   try {
     const allStores = await Store.find()
-    res.json(allStores)
+    res.status(200).json(allStores)
   } catch (err) {
     res.json({ message: err })
   }
@@ -48,7 +49,7 @@ router.patch('/:storeId', async (req, res) => {
 })
 
 // Add Store
-router.post('/', async (req, res) => {
+router.post('/add-store', async (req, res) => {
   const newStore = new Store({
     storeId: req.body.storeId,
     storeAddress: req.body.storeAddress,

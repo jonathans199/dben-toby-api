@@ -1,13 +1,12 @@
 const express = require('express')
-
 const router = express.Router()
 
+const Product = require('../models/productModel')
+
 router.get('/', (req, res) => {
-  res.send('Getting All users')
+  const allProducts = Product.find()
+  res.json(allProducts)
 })
 
-router.get('/user', (req, res) => {
-  res.send('Getting one user')
-})
 
 module.exports = router
