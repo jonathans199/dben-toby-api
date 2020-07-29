@@ -1,42 +1,77 @@
-const mongoose = require ('mongoose')
+const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
   invoiceNumber: {
-    type: Number
+    type: Number,
   },
-  user: {
-
-  },
+  user: {},
+  products: [
+    {
+      itemNumber: {
+        type: String,
+        unique: true,
+        required: true,
+      },
+      upc: {
+        type: Number,
+        unique: true,
+        required: true,
+      },
+      cvsNumber: {
+        type: Number,
+        unique: true,
+      },
+      price: {
+        type: Number,
+      },
+      description: {
+        type: String,
+      },
+      pack: {
+        type: Number,
+      },
+      category: {
+        type: String,
+      },
+      brand: {
+        type: String,
+      },
+      productType: {
+        type: String,
+      },
+      image: {
+        type: String,
+      },
+    },
+  ],
   storeSoldTo: {
     // to store model
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   orderPoNumber: {
-    type: String
+    type: String,
   },
   unitsDelivered: {
-    type: Number
+    type: Number,
   },
   casesDelivered: {
-    type: Number
+    type: Number,
   },
   totalInvoice: {
-    type: String
+    type: String,
   },
   terms: {
-    type: String
+    type: String,
   },
   receivedBy: {
-    type: String
+    type: String,
   },
   notes: {
-    type: m
-  }
-
-
-
-
+    type: m,
+  },
 })
+
+module.exports = mongoose.model('OrderModel', OrderSchema)

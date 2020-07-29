@@ -29,19 +29,22 @@ app.use('/api/users', usersRoute)
 mongoose.connect(
   process.env.DB_CONNECTION,
   {
+    useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
-  },
-  (err) => {
-    if (err) throw err
+  })
+  .then( result => {
+    app.listen(3001)
     console.log('Connected to Mongo')
-  }
-)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
 app.get('/', requireAuth, (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-app.listen(3000, () => {
-  console.log('Node API on port 3000')
-})
+// app.listen(3000, () => {
+//   console.log('Node API on port 3000')
+// })

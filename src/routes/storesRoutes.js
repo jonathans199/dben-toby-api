@@ -1,29 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
+const storeController = require('../controllers/storeController')
 const Store = require('../models/storeModel')
-// const requireAuth = require('../middlewares/requireAuth')
-// const { request } = require('express')
 
-// Get all Stores
-router.get('/', async (req, res) => {
-  try {
-    const allStores = await Store.find()
-    res.status(200).json(allStores)
-  } catch (err) {
-    res.json({ message: err })
-  }
-})
+router.get('/', storeController.getAllStores)
 
-// Get Store
-router.get('/:storeId', async (req, res) => {
-  try {
-    const store = await Store.findById(req.params.storeId)
-    res.json(store)
-  } catch (err) {
-    res.json({ message: err })
-  }
-})
+router.get('/get-store', storeController.getStore)
+
+router.post('/add-store', storeController.addStore)
+
 
 // Delete Store
 router.delete('/:storeId', async (req, res) => {
@@ -43,21 +29,6 @@ router.patch('/:storeId', async (req, res) => {
       { $set: { storeId: req.body.storeId } }
     )
     res.json(updatedStore)
-  } catch (err) {
-    res.json({ message: err })
-  }
-})
-
-// Add Store
-router.post('/add-store', async (req, res) => {
-  const newStore = new Store({
-    storeId: req.body.storeId,
-    storeAddress: req.body.storeAddress,
-  })
-
-  try {
-    const savedStore = await newStore.save()
-    res.json(savedStore)
   } catch (err) {
     res.json({ message: err })
   }
