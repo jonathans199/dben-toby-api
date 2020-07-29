@@ -11,7 +11,7 @@ exports.addStore = (req, res, next) => {
     forklift: req.body.forklift,
     notes: req.body.notes,
     contactOne: req.body.contactOne,
-    contactTwo: req.body.contactTwo
+    contactTwo: req.body.contactTwo,
   })
   newStore
     .save()
@@ -49,20 +49,20 @@ exports.getStore = (req, res, next) => {
     })
 }
 
-exports.editStore = (res, req, next) => {
+exports.editStore = (req, res, next) => {
   Store.findOne({ storeId: req.body.storeId })
-    .then(store => {
-      store.storeId = req.body.newStoreId
-      store.storeAddress = req.body.newStoreAddress
-      store.storePhone = req.body.newStorePhone
-      store.deliveryHours = req.body.newStoreHours
-      store.deliveryDays = req.body.newStoreDeliveryDays
-      store.districtManager = req.body.newDistrictManager
-      store.forklift = req.body.newForklift
-      store.notes = req.body.newNotes
-      store.contactOne = req.body.newContactOne
-      store.contactTwo = req.body.newContactTwo
-      return store.save()
+    .then(updatedStore => {
+      updatedStore.storeId = req.body.newStoreId
+      updatedStore.storeAddress = req.body.newStoreAddress
+      updatedStore.storePhone = req.body.newStorePhone
+      updatedStore.deliveryHours = req.body.newStoreHours
+      updatedStore.deliveryDays = req.body.newStoreDeliveryDays
+      updatedStore.districtManager = req.body.newDistrictManager
+      updatedStore.forklift = req.body.newForklift
+      updatedStore.notes = req.body.newNotes
+      updatedStore.contactOne = req.body.newContactOne
+      updatedStore.contactTwo = req.body.newContactTwo
+      return updatedStore.save()
     })
     .then(updatedStore => {
       res.status(200).json(updatedStore)
@@ -71,4 +71,10 @@ exports.editStore = (res, req, next) => {
       console.log(err)
       res.status(500).send('Error: could not edit Store')
     })
+}
+
+exports.deleteStore = (req, res, next) => {
+  Store.remove({ storeId: req.body.storeId }).then(removedStore => {
+    res.status(200).json(removedStore)
+  })
 }
