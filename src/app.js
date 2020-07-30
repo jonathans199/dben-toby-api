@@ -22,8 +22,16 @@ app.use(authRoutes)
 const storesRoute = require('./routes/storesRoutes')
 app.use('/api/stores', storesRoute)
 
+const productsRoute = require('./routes/productsRoutes') 
+app.use('/api/products', productsRoute)
+
 const usersRoute = require('./routes/usersRoutes')
 app.use('/api/users', usersRoute)
+
+// const ordersRoute = require('./routes/orderRoutes')
+
+
+
 
 
 mongoose.connect(
