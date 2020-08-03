@@ -7,7 +7,6 @@ const cors = require('cors')
 require('./models/userModel')
 require('./models/storeModel')
 
-const authRoutes = require('./routes/auth')
 const requireAuth = require('./middlewares/requireAuth')
 
 const app = express()
@@ -16,8 +15,8 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const authRoute = require('./routes/auth')
-app.use(authRoutes)
+const authRoute = require('./routes/authRoutes')
+app.use(authRoute)
 
 const storesRoute = require('./routes/storesRoutes')
 app.use('/api/stores', storesRoute)
