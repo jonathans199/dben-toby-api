@@ -4,7 +4,7 @@ const router = express.Router()
 const authorization = require('../middlewares/requireAuth')
 const storeController = require('../controllers/storeController')
 
-router.get('/', authorization, storeController.getAllStores)
+router.get('/', storeController.getAllStores)
 
 router.get('/get-store', storeController.getStore)
 
