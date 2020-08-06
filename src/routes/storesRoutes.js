@@ -6,7 +6,7 @@ const storeController = require('../controllers/storeController')
 
 router.get('/', storeController.getAllStores)
 
-router.get('/get-store', storeController.getStore)
+router.get('/:storeId', storeController.getStore)
 
 router.post('/add-store', storeController.addStore)
 

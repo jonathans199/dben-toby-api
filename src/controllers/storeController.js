@@ -38,7 +38,7 @@ exports.getAllStores = (req, res, next) => {
 }
 
 exports.getStore = (req, res, next) => {
-  Store.findOne({ storeId: req.body.storeId })
+  Store.findOne({ storeId: req.query.id})
     .then(storeReceived => {
       console.log(storeReceived)
       res.status(200).json(storeReceived)
