@@ -21,16 +21,20 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // userType: {
-  //   type: Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: 'UserType'
-  // },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
   userType: {
     type: String,
     required: true,
     // ref: 'UserType'
   },
+  notes: {
+    type: String,
+  }
 })
 
 userSchema.pre('save', function (next) {

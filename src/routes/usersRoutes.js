@@ -49,6 +49,9 @@ router.post('/add-user', async (req, res) => {
     email: req.body.email,
     password: req.body.password,
     userType: req.body.userType,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    notes: req.body.notes
   })
 
   try {
