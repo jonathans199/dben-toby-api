@@ -4,7 +4,9 @@ const OrderSchema = new mongoose.Schema({
   invoiceNumber: {
     type: Number,
   },
-  user: {},
+  user: {
+    
+  },
   products: [
     {
       itemNumber: {
