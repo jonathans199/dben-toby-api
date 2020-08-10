@@ -7,10 +7,10 @@ const StoreSchema = new mongoose.Schema({
     required: true
   },
   storeAddress: {
-    type: String,
+    type: String
   },
   storePhone: {
-    type: String,
+    type: String
   },
   deliveryHours: {
     type: String
@@ -32,8 +32,10 @@ const StoreSchema = new mongoose.Schema({
   },
   contactTwo: {
     type: String
+  }, 
+  active: {
+    type: Boolean
   }
-
 })
 
 module.exports = mongoose.model('Store', StoreSchema)
