@@ -29,10 +29,6 @@ app.use('/api/users', usersRoute)
 
 // const ordersRoute = require('./routes/orderRoutes')
 
-
-
-
-
 mongoose.connect(
   process.env.DB_CONNECTION,
   {
@@ -48,10 +44,6 @@ mongoose.connect(
     console.log(err)
   })
 
-app.get('/', requireAuth, (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
-
-// app.listen(3000, () => {
-//   console.log('Node API on port 3000')
+// app.get('/', requireAuth, (req, res) => {
+//   res.sendFile(__dirname + '/index.html')
 // })
