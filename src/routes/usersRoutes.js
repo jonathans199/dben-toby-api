@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/get-user/:id', async (req, res) => {
+router.get('/:email', async (req, res) => {
   try {
-    const foundUser = await User.findById(req.params.id)
+    const foundUser = await User.findOne({email: req.query.id})
     res.status(200).json(foundUser)
   } catch (err) {
     res.json({ message: err })
