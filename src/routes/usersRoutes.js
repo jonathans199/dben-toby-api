@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const User = require('../models/userModel')
+const userController = require('../controllers/userController')
 
 // get all users
 router.get('/', async (req, res) => {
@@ -31,18 +32,19 @@ router.delete('/delete-user/:id', async (req, res) => {
   }
 })
 
-// todo update route
-router.put('/update-user/:email', async (req, res) => {
-  try {
-    const updatedUser = await User.updateOne(
-      { email: req.params.email },
-      { $set: { email: req.body.email } }
-    )
-    res.json(updatedUser)
-  } catch (err) {
-    res.json({ message: err })
-  }
-})
+router.put('/edit-user', userController.editUser)
+
+// router.put('/edit-user/', async (req, res) => {
+//   try {
+//     const updatedUser = await User.updateOne(
+//       { email: req.body.email },
+//       // { $set: { email: req.body.email } }
+//     )
+//     res.json(updatedUser)
+//   } catch (err) {
+//     res.json({ message: err })
+//   }
+// })
 
 router.post('/add-user', async (req, res) => {
   const newUser = new User({
@@ -51,7 +53,8 @@ router.post('/add-user', async (req, res) => {
     userType: req.body.userType,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    notes: req.body.notes
+    notes: req.body.notes,
+    active: true
   })
 
   try {
