@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
+  },
+  active: {
+    type: Boolean,
   }
 })
 
