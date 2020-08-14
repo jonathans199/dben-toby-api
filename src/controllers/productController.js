@@ -13,7 +13,7 @@ exports.getAllProducts = (req, res, next) => {
 }
 
 exports.getProduct = (req, res, next) => {
-  Product.findOne({ itemNumber: req.body.itemNumber})
+  Product.findOne({ itemNumber: req.query.id})
   .then(productFound => {
     console.log(productFound)
     res.status(200).json(productFound)
@@ -36,7 +36,9 @@ exports.addProduct = (req, res, next) => {
     category: req.body.category, 
     brand: req.body.brand, 
     productType: req.body.productType, 
-    image: req.body.image 
+    image: req.body.image,
+    note: req.body.note,
+    active: true
   })
   newProduct
     .save()
@@ -53,9 +55,9 @@ exports.addProduct = (req, res, next) => {
 exports.editProduct = (req, res, next) => {
   Product.findOne({itemNumber: req.body.itemNumber})
   .then(updatedProduct => {
-    updatedProduct.itemNumber = req.body.newItemNumber
-    updatedProduct.upc = req.body.newUpc
-    updatedProduct.cvsNumber = req.body.newCvsNumber
+    // updatedProduct.itemNumber = req.body.newItemNumber
+    // updatedProduct.upc = req.body.newUpc
+    // updatedProduct.cvsNumber = req.body.newCvsNumber
     updatedProduct.price = req.body.newPrice
     updatedProduct.description = req.body.newDescription
     updatedProduct.pack = req.body.newPack
@@ -63,6 +65,8 @@ exports.editProduct = (req, res, next) => {
     updatedProduct.brand = req.body.newBrand
     updatedProduct.productType = req.body.newProductType
     updatedProduct.image = req.body.newImage
+    updatedProduct.notes = req.body.newNotes
+    updatedProduct.active = req.body.newActive
     return updatedProduct.save()
   })
   .then(updatedProduct => {
