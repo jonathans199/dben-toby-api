@@ -1,7 +1,33 @@
 const Order = require('../models/orderModel')
 
+
+exports.getAllOrders = (req, res, next) => {
+	Order.find()
+	.then(allOrders => {
+		console.log(allOrders)
+		res.status(200).json(allOrders)
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(404).send('Error: Orders not found')
+	})
+}
+
+exports.getOrder = (req, res, next) => {
+	Order.findeOne({ orderNumber: req.query.id })
+	.then(orderReceived => {
+		console.log(orderReceived)
+		res.status(200).json(orderReceived)
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(404).send('Error: Could not find Order Number')
+	})
+}
+
 exports.addOrder = (req, res, next) => {
 	const newOrder = new Order({
+		orderNumber: getNextSequenceValue(),
 		user: req.body.user,
 		products: req.body.products,
 		storeSoldTo: req.body.storeSoldTo,
@@ -24,24 +50,36 @@ exports.addOrder = (req, res, next) => {
 			console.log(err)
 			res.status(500).send(' Error: Store not added ')
 		})
+
 }
 
-// s
 
-// exports.editStore = (req, res, next) => {
-//   Store.findOne({ storeId: req.body.storeId })
-//     .then(updatedStore => {
-//       updatedStore.storeId = req.body.newStoreId
-//       updatedStore.storeAddress = req.body.newStoreAddress
-//       updatedStore.storePhone = req.body.newStorePhone
-//       updatedStore.deliveryHours = req.body.newStoreHours
-//       updatedStore.deliveryDays = req.body.newStoreDeliveryDays
-//       updatedStore.districtManager = req.body.newDistrictManager
-//       updatedStore.forklift = req.body.newForklift
-//       updatedStore.notes = req.body.newNotes
-//       updatedStore.contactOne = req.body.newContactOne
-//       updatedStore.contactTwo = req.body.newContactTwo
-//       return updatedStore.save()
+// exports.editOrder = (req, res, next) => {
+//   Store.findOne({ orderNumber: req.body.orderNumber })
+//     .then(updatedOrder => {
+// 		updatedOrder.orderNumber = req.body.newOrderNumber,
+// 		user: req.body.user,
+// 		products: req.body.products,
+// 		storeSoldTo: req.body.storeSoldTo,
+// 		date: req.body.date,
+// 		orderPoNumber: req.body.orderPoNumber,
+// 		unitsDelivered: req.body.unitsDelivered,
+// 		casesDelivered: req.body.casesDelivered,
+// 		totalInvoice: req.body.totalInvoice,
+// 		terms: req.body.terms,
+// 		receivedBy: req.body.receivedBy,
+// 		notes: req.body.notes,
+//       updatedOrder.storeId = req.body.newStoreId
+//       updatedOrder.storeAddress = req.body.newStoreAddress
+//       updatedOrder.storePhone = req.body.newStorePhone
+//       updatedOrder.deliveryHours = req.body.newStoreHours
+//       updatedOrder.deliveryDays = req.body.newStoreDeliveryDays
+//       updatedOrder.districtManager = req.body.newDistrictManager
+//       updatedOrder.forklift = req.body.newForklift
+//       updatedOrder.notes = req.body.newNotes
+//       updatedOrder.contactOne = req.body.newContactOne
+//       updatedOrder.contactTwo = req.body.newContactTwo
+//       return updatedOrder.save()
 //     })
 //     .then(updatedStore => {
 //       res.status(200).json(updatedStore)

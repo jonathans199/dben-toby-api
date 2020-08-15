@@ -10,8 +10,8 @@ router.get('/:orderId', orderController.getOrder)
 
 router.post('/add-order', orderController.addOrder)
 
-router.put('/edit-order', orderController.editOrder)
+// router.put('/edit-order', orderController.editOrder)
 
-router.delete('/delete-order', orderController.deleteOrder)
+// router.delete('/delete-order', orderController.deleteOrder)
 
 module.exports = router

@@ -2,53 +2,14 @@ const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
   invoiceNumber: {
-    type: Number,
+    type: Number
   },
-  user: {
+  // user: {
     
-  },
-  products: [
-    {
-      itemNumber: {
-        type: String,
-        unique: true,
-        required: true,
-      },
-      upc: {
-        type: Number,
-        unique: true,
-        required: true,
-      },
-      cvsNumber: {
-        type: Number,
-        unique: true,
-      },
-      price: {
-        type: Number,
-      },
-      description: {
-        type: String,
-      },
-      pack: {
-        type: Number,
-      },
-      category: {
-        type: String,
-      },
-      brand: {
-        type: String,
-      },
-      productType: {
-        type: String,
-      },
-      image: {
-        type: String,
-      },
-    },
-  ],
-  storeSoldTo: {
-    // to store model
-  },
+  // },
+  // products: [ProductSchema],
+  // storeSoldTo: {
+  // },
   date: {
     type: Date,
     default: Date.now,
@@ -72,8 +33,8 @@ const OrderSchema = new mongoose.Schema({
     type: String,
   },
   notes: {
-    type: m,
+    type: String,
   },
 })
 
-module.exports = mongoose.model('OrderModel', OrderSchema)
+module.exports = mongoose.model('Order', OrderSchema)

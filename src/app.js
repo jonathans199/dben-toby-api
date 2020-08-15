@@ -27,7 +27,8 @@ app.use('/api/products', productsRoute)
 const usersRoute = require('./routes/usersRoutes')
 app.use('/api/users', usersRoute)
 
-// const ordersRoute = require('./routes/orderRoutes')
+const ordersRoute = require('./routes/ordersRoutes')
+app.use('/api/orders', ordersRoute)
 
 mongoose.connect(
   process.env.DB_CONNECTION,
