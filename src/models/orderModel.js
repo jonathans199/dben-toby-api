@@ -1,15 +1,19 @@
 const mongoose = require('mongoose')
+const ProductSchema = require('./productModel')
 
 const OrderSchema = new mongoose.Schema({
   invoiceNumber: {
     type: Number
   },
-  // user: {
-    
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  store: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Store'
+  },
   // products: [ProductSchema],
-  // storeSoldTo: {
-  // },
   date: {
     type: Date,
     default: Date.now,
