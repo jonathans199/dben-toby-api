@@ -14,7 +14,7 @@ exports.getAllOrders = (req, res, next) => {
 }
 
 exports.getOrder = (req, res, next) => {
-	Order.findeOne({ orderNumber: req.query.id })
+	Order.findOne({ orderNumber: req.query.id })
 	.then(orderReceived => {
 		console.log(orderReceived)
 		res.status(200).json(orderReceived)
@@ -27,10 +27,10 @@ exports.getOrder = (req, res, next) => {
 
 exports.addOrder = (req, res, next) => {
 	const newOrder = new Order({
-		orderNumber: getNextSequenceValue(),
+		orderNumber: req.body.orderNumber,
 		user: req.body.user,
 		products: req.body.products,
-		storeSoldTo: req.body.storeSoldTo,
+		store: req.body.store,
 		date: req.body.date,
 		orderPoNumber: req.body.orderPoNumber,
 		unitsDelivered: req.body.unitsDelivered,
@@ -48,7 +48,7 @@ exports.addOrder = (req, res, next) => {
 		})
 		.catch(err => {
 			console.log(err)
-			res.status(500).send(' Error: Store not added ')
+			res.status(500).send(' Error: Order not added ')
 		})
 
 }

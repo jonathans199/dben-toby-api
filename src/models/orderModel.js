@@ -2,18 +2,27 @@ const mongoose = require('mongoose')
 const ProductSchema = require('./productModel')
 
 const OrderSchema = new mongoose.Schema({
-  invoiceNumber: {
-    type: Number
+  orderNumber: {
+    type: Number,
+    required: true,
+    unique: true
   },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User'
+  // },
+  // store: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Store'
+  // },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    type: String,
+    required: true,
   },
   store: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Store'
+    type: String,
+    required: true
   },
-  // products: [ProductSchema],
   date: {
     type: Date,
     default: Date.now,
@@ -39,6 +48,9 @@ const OrderSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  products: {
+    type: Array,
+  }
 })
 
 module.exports = mongoose.model('Order', OrderSchema)
