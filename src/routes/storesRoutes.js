@@ -8,6 +8,8 @@ router.get('/', storeController.getAllStores)
 
 router.get('/:storeId', storeController.getStore)
 
+// router.get('/find/:query', storeController.findStore)
+
 router.post('/add-store', storeController.addStore)
 
 router.put('/edit-store', storeController.editStore)
