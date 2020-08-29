@@ -38,6 +38,7 @@ exports.editStore = (req, res, next) => {
 			updatedStore.contactOne = req.body.newContactOne
 			updatedStore.contactTwo = req.body.newContactTwo
 			updatedStore.active = req.body.newActive
+			updatedStore.email = req.body.newEmail
 			return updatedStore.save()
 		})
 		.then(updatedStore => {
@@ -62,6 +63,7 @@ exports.addStore = (req, res, next) => {
 		contactOne: req.body.contactOne,
 		contactTwo: req.body.contactTwo,
 		active: req.body.active,
+		email: req.body.email
 	})
 	newStore
 		.save()

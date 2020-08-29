@@ -10,7 +10,7 @@ router.get('/:orderNumber', orderController.getOrder)
 
 router.post('/add-order', orderController.addOrder)
 
-// router.put('/edit-order', orderController.editOrder)
+router.put('/edit-order', orderController.editOrder)
 
 // router.delete('/delete-order', orderController.deleteOrder)
 

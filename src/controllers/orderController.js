@@ -31,7 +31,6 @@ exports.addOrder = (req, res, next) => {
 		user: req.body.user,
 		products: req.body.products,
 		store: req.body.store,
-		date: req.body.date,
 		orderPoNumber: req.body.orderPoNumber,
 		unitsDelivered: req.body.unitsDelivered,
 		casesDelivered: req.body.casesDelivered,
@@ -54,41 +53,31 @@ exports.addOrder = (req, res, next) => {
 }
 
 
-// exports.editOrder = (req, res, next) => {
-//   Store.findOne({ orderNumber: req.body.orderNumber })
-//     .then(updatedOrder => {
-// 		updatedOrder.orderNumber = req.body.newOrderNumber,
-// 		user: req.body.user,
-// 		products: req.body.products,
-// 		storeSoldTo: req.body.storeSoldTo,
-// 		date: req.body.date,
-// 		orderPoNumber: req.body.orderPoNumber,
-// 		unitsDelivered: req.body.unitsDelivered,
-// 		casesDelivered: req.body.casesDelivered,
-// 		totalInvoice: req.body.totalInvoice,
-// 		terms: req.body.terms,
-// 		receivedBy: req.body.receivedBy,
-// 		notes: req.body.notes,
-//       updatedOrder.storeId = req.body.newStoreId
-//       updatedOrder.storeAddress = req.body.newStoreAddress
-//       updatedOrder.storePhone = req.body.newStorePhone
-//       updatedOrder.deliveryHours = req.body.newStoreHours
-//       updatedOrder.deliveryDays = req.body.newStoreDeliveryDays
-//       updatedOrder.districtManager = req.body.newDistrictManager
-//       updatedOrder.forklift = req.body.newForklift
-//       updatedOrder.notes = req.body.newNotes
-//       updatedOrder.contactOne = req.body.newContactOne
-//       updatedOrder.contactTwo = req.body.newContactTwo
-//       return updatedOrder.save()
-//     })
-//     .then(updatedStore => {
-//       res.status(200).json(updatedStore)
-//     })
-//     .catch(err => {
-//       console.log(err)
-//       res.status(500).send('Error: could not edit Store')
-//     })
-// }
+exports.editOrder = (req, res, next) => {
+  Order.findOne({ orderNumber: req.body.orderNumber })
+    .then(updatedOrder => {
+			// updatedOrder.orderNumber = req.body.newOrderNumber
+			updatedOrder.orderPoNumber = req.body.newOrderPoNumber
+      updatedOrder.user = req.body.newUser
+      updatedOrder.store = req.body.newStore
+      updatedOrder.orderPoNumber = req.body.newOrderPoNumber
+      updatedOrder.unitsDelivered = req.body.newUnitsDelivered
+      updatedOrder.casesDelivered = req.body.newCasesDelivered
+      updatedOrder.totalInvoice = req.body.NewTotalInvoice
+      updatedOrder.terms = req.body.newTerms
+      updatedOrder.receivedBy = req.body.newReceivedBy
+			updatedOrder.notes = req.body.newNotes
+			updatedOrder.products = req.body.newProducts
+      return updatedOrder.save()
+    })
+    .then(updatedStore => {
+      res.status(200).json(updatedStore)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('Error: could not edit Order')
+    })
+}
 
 exports.deleteOrder = (req, res, next) => {
 	Order.remove({ storeId: req.body.storeId }).then(removedOrder => {
