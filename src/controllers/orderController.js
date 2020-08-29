@@ -57,11 +57,10 @@ exports.editOrder = (req, res, next) => {
   Order.findOne({ orderNumber: req.body.orderNumber })
     .then(updatedOrder => {
 			// updatedOrder.orderNumber = req.body.newOrderNumber
-			updatedOrder.orderPoNumber = req.body.newOrderPoNumber
-      updatedOrder.user = req.body.newUser
-      updatedOrder.store = req.body.newStore
-      updatedOrder.orderPoNumber = req.body.newOrderPoNumber
-      updatedOrder.unitsDelivered = req.body.newUnitsDelivered
+			// updatedOrder.orderPoNumber = req.body.newOrderPoNumber
+      // updatedOrder.user = req.body.newUser
+      // updatedOrder.store = req.body.newStore
+      // updatedOrder.unitsDelivered = req.body.newUnitsDelivereds
       updatedOrder.casesDelivered = req.body.newCasesDelivered
       updatedOrder.totalInvoice = req.body.NewTotalInvoice
       updatedOrder.terms = req.body.newTerms
