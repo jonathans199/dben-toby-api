@@ -6,12 +6,12 @@ const userController = require('../controllers/userController')
 
 // get all users
 router.get('/', async (req, res) => {
-  try {
-    const allUsers = await User.find()
-    res.status(200).json(allUsers)
-  } catch (err) {
-    res.json({ message: err })
-  }
+	try {
+		const allUsers = await User.find()
+		res.status(200).json(allUsers)
+	} catch (err) {
+		res.json({ message: err })
+	}
 })
 
 router.get('/:email', async (req, res) => {
