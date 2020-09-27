@@ -38,7 +38,8 @@ exports.addProduct = (req, res, next) => {
     productType: req.body.productType, 
     image: req.body.image,
     note: req.body.note,
-    active: true
+    active: true,
+    special: false
   })
   newProduct
     .save()
@@ -67,6 +68,8 @@ exports.editProduct = (req, res, next) => {
     updatedProduct.image = req.body.newImage
     updatedProduct.notes = req.body.newNotes
     updatedProduct.active = req.body.newActive
+    updatedProduct.special = req.body.newSpecial
+
     return updatedProduct.save()
   })
   .then(updatedProduct => {

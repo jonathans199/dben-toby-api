@@ -40,6 +40,9 @@ const ProductSchema = new mongoose.Schema(
 		},
 		active: {
 			type: Boolean,
+		},
+		special: {
+			type: Boolean
 		}
 	},
 	{ timestamps: true }
