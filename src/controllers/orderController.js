@@ -1,20 +1,13 @@
 const sgMail = require('@sendgrid/mail')
+require('dotenv').config()
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const Order = require('../models/orderModel')
 
-const msg = {
-	to: 'jonathans199@gmail.com',
-	from: 'jso@gmail.com',
-	subject: 'Sending from Sendgrid',
-	text: 'here is the test from node',
-	html: '<strong> here is the info </strong>',
-}
-
 exports.getAllOrders = (req, res, next) => {
 	Order.find()
 		.then(allOrders => {
-			console.log(allOrders)
+			// console.log(allOrders)
 			res.status(200).json(allOrders)
 		})
 		.catch(err => {
@@ -49,24 +42,33 @@ exports.addOrder = (req, res, next) => {
 		receivedBy: req.body.receivedBy,
 		notes: req.body.notes,
 	})
+
+	const msg = {
+		to: newOrder.user,
+		from: 'jonsthewebguy@gmail.com',
+		subject: `New order ${newOrder.orderNumber} from Dbentoby Sales app by ${newOrder.user}`,
+		text: 'here is the test from node',
+		html: `<strong> Here is the order #${newOrder.orderNumber} user: ${newOrder.user} </strong> <p> <h4> Notes: ${newOrder.notes} </h4></p>  <p><h2> Total ${newOrder.notes} </h2> </p>`,
+	}
+
 	newOrder
 		.save()
 		.then(newOrder => {
-			console.log(newOrder)
+			// console.log(newOrder)
 			res.status(201).json(newOrder)
 		})
 		.catch(err => {
 			console.log(err)
 			res.status(500).send(' Error: Order not added ')
 		})
-	sgMail.send(msg).then(() => {}),
-		error => {
+	sgMail
+		.send(msg)
+		.then(() => {
+			console.log('message sent')
+		})
+		.catch(error => {
 			console.log(error)
-
-			if (error.response) {
-				console.error(error.response.body)
-			}
-		}
+		})
 }
 
 exports.editOrder = (req, res, next) => {

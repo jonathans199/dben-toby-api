@@ -3,7 +3,7 @@ const Store = require('../models/storeModel')
 exports.getAllStores = (req, res, next) => {
 	Store.find()
 		.then(allStores => {
-			console.log(allStores)
+			// console.log(allStores)
 			res.status(200).json(allStores)
 		})
 		.catch(err => {
