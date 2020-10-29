@@ -8,8 +8,8 @@ const ProductSchema = new mongoose.Schema(
 			required: true,
 		},
 		upc: {
-			type: Number,
-			// unique: true,
+			type: String,
+			unique: true,
 		},
 		cvsNumber: {
 			type: String,
