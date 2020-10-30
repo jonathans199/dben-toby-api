@@ -19,7 +19,7 @@ const StoreSchema = new mongoose.Schema(
 		deliveryDays: {
 			type: String,
 		},
-		districtManager: {
+		storeManager: {
 			type: String,
 		},
 		forklift: {
@@ -34,10 +34,13 @@ const StoreSchema = new mongoose.Schema(
 		contactTwo: {
 			type: String,
 		},
+		class: {
+			type: String,
+		},
 		active: {
 			type: Boolean,
 		},
-		email: {
+		terms: {
 			type: String,
 		}
 	},

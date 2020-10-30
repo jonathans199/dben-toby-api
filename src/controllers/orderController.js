@@ -19,7 +19,7 @@ exports.getAllOrders = (req, res, next) => {
 exports.getOrder = (req, res, next) => {
 	Order.findOne({ orderNumber: req.query.id })
 		.then(orderReceived => {
-			console.log(orderReceived)
+			// console.log(orderReceived)
 			res.status(200).json(orderReceived)
 		})
 		.catch(err => {
@@ -48,7 +48,7 @@ exports.addOrder = (req, res, next) => {
 		from: 'jonsthewebguy@gmail.com',
 		subject: `New order ${newOrder.orderNumber} from Dbentoby Sales app by ${newOrder.user}`,
 		text: 'here is the test from node',
-		html: `<strong> Here is the order #${newOrder.orderNumber} user: ${newOrder.user} </strong> <p> <h4> Notes: ${newOrder.notes} </h4></p>  <p><h2> Total ${newOrder.notes} </h2> </p>`,
+		html: `<strong> Here is the order #${newOrder.orderNumber} user: ${newOrder.user} </strong> <p> <h4> Notes: ${newOrder.notes} </h4></p>  <p><h2> Total ${newOrder.totalInvoice} </h2> </p>`,
 	}
 
 	newOrder

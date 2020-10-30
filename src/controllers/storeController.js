@@ -15,7 +15,7 @@ exports.getAllStores = (req, res, next) => {
 exports.getStore = (req, res, next) => {
 	Store.findOne({ storeId: req.query.id })
 		.then(storeReceived => {
-			console.log(storeReceived)
+			// console.log(storeReceived)
 			res.status(200).json(storeReceived)
 		})
 		.catch(err => {
@@ -32,13 +32,14 @@ exports.editStore = (req, res, next) => {
 			updatedStore.storePhone = req.body.newStorePhone
 			updatedStore.deliveryHours = req.body.newDeliveryHours
 			updatedStore.deliveryDays = req.body.newDeliveryDays
-			updatedStore.districtManager = req.body.newDistrictManager
+			updatedStore.storeManager = req.body.newStoreManager
 			updatedStore.forklift = req.body.newForklift
 			updatedStore.notes = req.body.newNotes
 			updatedStore.contactOne = req.body.newContactOne
 			updatedStore.contactTwo = req.body.newContactTwo
+			updatedStore.class = req.body.newClass
 			updatedStore.active = req.body.newActive
-			updatedStore.email = req.body.newEmail
+			updatedStore.terms = req.body.newTerms
 			return updatedStore.save()
 		})
 		.then(updatedStore => {
@@ -57,18 +58,19 @@ exports.addStore = (req, res, next) => {
 		storePhone: req.body.storePhone,
 		deliveryHours: req.body.deliveryHours,
 		deliveryDays: req.body.deliveryDays,
-		districtManager: req.body.districtManager,
+		storeManager: req.body.storeManager,
 		forklift: req.body.forklift,
 		notes: req.body.notes,
 		contactOne: req.body.contactOne,
 		contactTwo: req.body.contactTwo,
+		class: req.body.class,
 		active: req.body.active,
-		email: req.body.email
+		terms: req.body.terms
 	})
 	newStore
 		.save()
 		.then(newStore => {
-			console.log(newStore)
+			// console.log(newStore)
 			res.status(201).json(newStore)
 		})
 		.catch(err => {
