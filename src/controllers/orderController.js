@@ -45,10 +45,11 @@ exports.addOrder = (req, res, next) => {
 
 	const msg = {
 		to: newOrder.user,
-		from: 'jonsthewebguy@gmail.com',
+		cc: 'info@dbentoby.com',
+		from: { email: 'info@dbentoby.com', name: 'DBen-Toby Sales app' },
 		subject: `New order ${newOrder.orderNumber} from Dbentoby Sales app by ${newOrder.user}`,
 		text: 'here is the test from node',
-		html: `<strong> Here is the order #${newOrder.orderNumber} user: ${newOrder.user} </strong> <p> <h4> Notes: ${newOrder.notes} </h4></p>  <p><h2> Total ${newOrder.totalInvoice} </h2> </p>`,
+		html: `<strong> Order #</strong> ${newOrder.orderNumber} <p> <strong>user:</strong> ${newOrder.user} </p><strong> See order here:</strong> http://jonsthewebguy.com/orderlink/${newOrder.orderNumber} </strong> <p> <h4> Notes: ${newOrder.notes ? newOrder.notes : 'no notes'} </h4></p>  <p><h2> Total ${newOrder.totalInvoice} </h2> </p>`,
 	}
 
 	newOrder
