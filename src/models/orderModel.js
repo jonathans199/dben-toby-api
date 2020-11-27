@@ -52,6 +52,9 @@ const OrderSchema = new mongoose.Schema(
 		products: {
 			type: Array,
 		},
+		signature: {
+			type: String
+		}
 	},
 	{ timestamps: true }
 )

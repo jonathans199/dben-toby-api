@@ -41,6 +41,7 @@ exports.addOrder = (req, res, next) => {
 		terms: req.body.terms,
 		receivedBy: req.body.receivedBy,
 		notes: req.body.notes,
+		signature: req.body.signature
 	})
 
 	const msg = {
