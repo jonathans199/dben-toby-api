@@ -42,8 +42,11 @@ const ProductSchema = new mongoose.Schema(
 			type: Boolean,
 		},
 		special: {
-			type: Boolean
-		}
+			type: Boolean,
+		},
+		retail: {
+			type: String,
+		},
 	},
 	{ timestamps: true }
 )

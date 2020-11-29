@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const ProductSchema = require('./productModel')
 
 const OrderSchema = new mongoose.Schema(
 	{
@@ -8,14 +7,6 @@ const OrderSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
-		// user: {
-		//   type: mongoose.Schema.Types.ObjectId,
-		//   ref: 'User'
-		// },
-		// store: {
-		//   type: mongoose.Schema.Types.ObjectId,
-		//   ref: 'Store'
-		// },
 		user: {
 			type: String,
 			required: true,
@@ -24,10 +15,6 @@ const OrderSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// date: {
-		// 	type: Date,
-		// 	default: Date.now.toDateString(),
-		// },
 		orderPoNumber: {
 			type: String,
 		},
@@ -53,8 +40,8 @@ const OrderSchema = new mongoose.Schema(
 			type: Array,
 		},
 		signature: {
-			type: String
-		}
+			type: String,
+		},
 	},
 	{ timestamps: true }
 )
